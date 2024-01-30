@@ -17,7 +17,10 @@ class product(models.Model):
     product_base_price = models.IntegerField()
     product_discounted_price = models.IntegerField()
     in_stock = models.BooleanField()
-    tags = models.ForeignKey(tag,to_field='name', related_name="product_tags", on_delete=models.CASCADE)
-    details=models.ForeignKey(details,to_field='name', related_name="product_details", on_delete=models.CASCADE)
+    tags = models.ForeignKey(tag,to_field='name', related_name="tags", on_delete=models.CASCADE)
+    details=models.ForeignKey(details,to_field='name', related_name="details", on_delete=models.CASCADE)
     class Meta:
         verbose_name_plural = "Products"
+
+    def __str__(self):
+        return str(self.id)

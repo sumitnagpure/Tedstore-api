@@ -4,7 +4,7 @@ from .models import *
 
 # Register your models here.
 @admin.register(product)
-class Product(admin.ModelAdmin):
+class product(admin.ModelAdmin):
     list_display = (
         "title",
         "description",

@@ -9,3 +9,6 @@ class account(models.Model):
     # email
     # date_joined
     phone_number = models.IntegerField()
+
+    def __str__(self):
+        return str(self.user)

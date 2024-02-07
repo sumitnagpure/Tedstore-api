@@ -1,15 +1,15 @@
-# product/urls.py
+# Product/urls.py
 from django.urls import path, include
 from .views import ProductView
 from product.models import *
 
 
 urlpatterns = [
-    path("api/product", ProductView.as_view(), name="product-api"),
+    path("all_products", ProductView.as_view(), name="Product-api"),
 ]
 
 
-# curl -H "Authorization: Token 75a6c6e111fae68b93aae82330b725df2779a353" http://localhost:8000/product/api/product
+# curl -H "Authorization: Token 159cd5e529c0c42e54851403a1fcc400ccdb215d" http://localhost:8000/product/all_products
 
 # sumit token
-# 75a6c6e111fae68b93aae82330b725df2779a353
+# 159cd5e529c0c42e54851403a1fcc400ccdb215d

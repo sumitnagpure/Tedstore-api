@@ -1,4 +1,4 @@
-# product/views.py
+# Product/views.py
 from django.shortcuts import render
 from .models import *
 from rest_framework.views import APIView

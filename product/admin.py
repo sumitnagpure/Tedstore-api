@@ -3,22 +3,27 @@ from .models import *
 
 
 # Register your models here.
-@admin.register(product)
-class product(admin.ModelAdmin):
-    list_display = (
-        "title",
-        "description",
-        "image",
-        "product_base_price",
-        "product_discounted_price",
-        "in_stock",
-        "tags",
-        "details",
-    )
-@admin.register(tag)
-class tag(admin.ModelAdmin):
-    list_display=['name']
+# @admin.register(Product)
+# class Product(admin.ModelAdmin):
+#     list_display = (
+#         "title",
+#         "description",
+#         "image",
+#         "base_price",
+#         "discounted_price",
+#         "in_stock",
+#         "tags",
+#         "details",
+#     )
 
-@admin.register(details)
-class details(admin.ModelAdmin):
-    list_display=['name']
+
+# @admin.register(Tag)
+# class tag(admin.ModelAdmin):
+#     list_display = ["tag_id","name"]
+admin.site.register(Tag)
+admin.site.register(Details)
+admin.site.register(Product)
+
+# @admin.register(Details)
+# class details(admin.ModelAdmin):
+#     list_display = ["name"]

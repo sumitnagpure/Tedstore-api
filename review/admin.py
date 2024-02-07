@@ -3,6 +3,6 @@ from .models import *
 
 
 # Register your models here.
-@admin.register(review)
+@admin.register(Review)
 class review(admin.ModelAdmin):
     list_display = ("posted_by", "data", "post_date", "upvotes", "downvotes")

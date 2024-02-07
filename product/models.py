@@ -1,37 +1,47 @@
-# product/models.py
+# Product/models.py
 from django.db import models
 
 
-class tag(models.Model):
+class Tag(models.Model):
+    tag_id =models.AutoField(primary_key=True)
     name = models.CharField(max_length=30, unique=True)
 
     class Meta:
         verbose_name_plural = "Tags"
 
+    def __str__(self):
+        return str(self.name)
 
-class details(models.Model):
-    name = models.CharField(max_length=40, unique=True)
+
+class Details(models.Model):
+    name = models.TextField(unique=True)
 
     class Meta:
         verbose_name_plural = "Details"
 
+    def __str__(self):
+        return str(self.name)
 
-class product(models.Model):
+
+class Product(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
+    # image = models.ImageField(upload_to="media/")
     image = models.ImageField()
-    product_base_price = models.IntegerField()
-    product_discounted_price = models.IntegerField()
+    base_price = models.IntegerField()
+    discounted_price = models.IntegerField()
     in_stock = models.BooleanField()
-    tags = models.ForeignKey(
-        tag, to_field="name", related_name="tags", on_delete=models.CASCADE
-    )
+    tags = models.ManyToManyField(Tag, related_name="Products")
     details = models.ForeignKey(
-        details, to_field="name", related_name="details", on_delete=models.CASCADE
+        Details, to_field="name", related_name="Details", on_delete=models.CASCADE
     )
-
+    
     class Meta:
         verbose_name_plural = "Products"
 
     def __str__(self):
         return str(self.title)
+
+class ProductImages(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image=models.ImageField(upload_to='media/')

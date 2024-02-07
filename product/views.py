@@ -13,6 +13,6 @@ class ProductView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        data = product.objects.all()
+        data = Product.objects.all()
         serializer = ProductSerializer(data, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

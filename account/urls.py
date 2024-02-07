@@ -5,11 +5,8 @@ from account.models import *
 
 
 urlpatterns = [
-    path("api/account", AccountView.as_view(), name="employee-api"),
+    path("all_accounts", AccountView.as_view(), name="employee-api"),
 ]
 
 
-# curl -H "Authorization: Token 75a6c6e111fae68b93aae82330b725df2779a353" http://localhost:8000/account/api/account
-
-# sumit token
-# 75a6c6e111fae68b93aae82330b725df2779a353
+# curl -H "Authorization: Token 159cd5e529c0c42e54851403a1fcc400ccdb215d" http://localhost:8000/account/all_accounts

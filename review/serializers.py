@@ -6,7 +6,11 @@ from .models import *
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ("posted_by","product_id", "data",
-                  "post_date","upvotes","downvotes",
-
+        fields = (
+            "posted_by",
+            "Product_id",
+            "data",
+            "post_date",
+            "upvotes",
+            "downvotes",
         )

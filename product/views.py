@@ -16,3 +16,15 @@ class ProductView(APIView):
         data = Product.objects.all()
         serializer = ProductSerializer(data, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class HeroSectionSlideView(APIView):
+    pass
+
+
+class SubCategoriesView(APIView):
+    pass
+
+
+class GetProductDetailsView(APIView):
+    pass

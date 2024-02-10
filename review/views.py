@@ -13,6 +13,8 @@ class ReviewView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        data = review.objects.all()
+        data = Review.objects.all()
         serializer = ReviewSerializer(data, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+def ProductDetails():
+    pass

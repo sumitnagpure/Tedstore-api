@@ -1,11 +1,12 @@
 # review/urls.py
 from django.urls import path, include
-from .views import ReviewView
+from .views import *
 from review.models import *
 
 
 urlpatterns = [
-    path("api/review", ReviewView.as_view(), name="employee-api"),
+    path("all_review", ReviewView.as_view(), name="employee-api"),
+    path("get_product_reviews", ProductDetails.as_view(), name="Product-Details")
 ]
 
 

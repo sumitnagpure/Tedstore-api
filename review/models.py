@@ -8,7 +8,7 @@ class Review(models.Model):
     posted_by = models.ForeignKey(
         account, related_name="posted_by", on_delete=models.CASCADE
     )
-    Product_id = models.ForeignKey(
+    product_id = models.ForeignKey(
         Product, related_name="Product_id", on_delete=models.CASCADE
     )
     data = models.TextField()

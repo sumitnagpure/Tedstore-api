@@ -26,7 +26,7 @@ class Details(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField()
+    # image = models.ImageField()
     base_price = models.IntegerField()
     discounted_price = models.IntegerField()
     in_stock = models.BooleanField()

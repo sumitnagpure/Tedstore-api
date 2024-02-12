@@ -6,8 +6,8 @@ from account.models import *
 
 urlpatterns = [
     # path("all_accounts", AccountView.as_view(), name="employee-api"),
-    path(r"all_accounts/", AccountView, name="accountNames"),
-    path(r"subscribed_users/", Subscribe, name = "SubscribedUsers"),
+    path("all_accounts/", AccountView, name="accountNames"),
+    path("subscribed_users/", Subscribe, name = "SubscribedUsers"),
 ]
 
 

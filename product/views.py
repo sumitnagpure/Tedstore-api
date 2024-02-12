@@ -1,30 +1,41 @@
 from django.shortcuts import render
+
+from core.settings import REST_FRAMEWORK
 from .models import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import ProductSerializer
-from rest_framework.authentication import SessionAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
 
 
-class ProductView(APIView):
-    # authentication_classes = [SessionAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
+@api_view(["GET"])
+def AllProducts(request):
+    if request.method == "GET":
         data = Product.objects.all()
-        serializer = ProductSerializer(data, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(data, status=status.HTTP_200_OK)
 
 
-class HeroSectionSlideView(APIView):
-    pass
+@api_view(["GET"])
+def HeroSectionSlide(request):
+    if request.method == "GET":
+        data = Product.objects.order_by("-id")[:1].values_list(
+            "id", "title", "description", "Product__ProductImage_image"
+        )
+        return Response(data, status=status.HTTP_200_OK)
+# Product.objects.order_by("-id")[:1].values_list("id", "title", "description","Product__ProductImage_image")
+
+# {product_id:int, product_title:yy, product_description:yy, product_image:yy}, ..to 5 records}
 
 
-class SubCategoriesView(APIView):
-    pass
+@api_view(["GET"])
+def SubCategories(request):
+    if request.method == "GET":
+        data = Product.objects.all()
+        return Response(data, status=status.HTTP_200_OK)
 
 
-class GetProductDetailsView(APIView):
-    pass
+@api_view(["GET"])
+def GetProductDetails(request):
+    if request.method == "GET":
+        data = Product.objects.all()
+        return Response(data, status=status.HTTP_200_OK)

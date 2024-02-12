@@ -15,3 +15,6 @@ class Order(models.Model):
     total_amount = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = "Orders"

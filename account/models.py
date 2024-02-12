@@ -12,3 +12,15 @@ class account(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+    class Meta:
+        db_table = "Accounts"
+
+class subscribers(models.Model):
+    email=models.EmailField()
+
+    def __str__(self):
+        return str(self.email)
+    
+    class Meta:
+        verbose_name = "Subscribers"

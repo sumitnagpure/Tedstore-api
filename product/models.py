@@ -1,4 +1,5 @@
 # Product/models.py
+from unittest.util import _MAX_LENGTH
 from django.db import models
 
 
@@ -22,11 +23,14 @@ class Details(models.Model):
     def __str__(self):
         return str(self.name)
 
+class Category(models.Model):
+    name = models.CharField(max_length=20)
+    subcategory = models.ForeignKey(Subcategory)
 
 class Product(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    # image = models.ImageField()
+    category = models.ForeignKey(Category)
     base_price = models.IntegerField()
     discounted_price = models.IntegerField()
     in_stock = models.BooleanField()

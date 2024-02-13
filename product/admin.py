@@ -23,7 +23,11 @@ from .models import *
 admin.site.register(Tag)
 admin.site.register(Details)
 admin.site.register(Product)
+admin.site.register(Category)
+admin.site.register(SubcategoryA)
+admin.site.register(SubcategoryB)
 # admin.site.register(ProductImages)
+
 
 class ProductImagesAdmin(admin.ModelAdmin):
     list_display = ("product", "image")

@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class account(models.Model):
-    user=models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     # first_name
     # last_name
     # email
@@ -12,15 +13,16 @@ class account(models.Model):
 
     def __str__(self):
         return str(self.user)
-
+    
     class Meta:
-        db_table = "Accounts"
+        verbose_name_plural = "Accounts"
+
 
 class subscribers(models.Model):
-    email=models.EmailField()
+    email = models.EmailField()
 
     def __str__(self):
         return str(self.email)
-    
+
     class Meta:
-        verbose_name = "Subscribers"
+        verbose_name_plural = "Subscribers"

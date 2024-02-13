@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from core.settings import REST_FRAMEWORK
+from django.http import JsonResponse
 from .models import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -33,14 +34,35 @@ def HeroSectionSlide(request):
 
 # Product.objects.order_by("-id")[:1].values_list("id", "title", "description","Product__ProductImage_image")
 
-# {product_id:int, product_title:yy, product_description:yy, product_image:yy}, ..to 5 records}
-
 
 @api_view(["GET"])
-def SubCategories(request):
-    if request.method == "GET":
-        data = Product.objects.all()
-        return Response(data, status=status.HTTP_200_OK)
+def SubCategories(request, category_id):
+    category = Category.objects.get(id=category_id)
+    subcategories_A = {}
+    subcategories_B = {}
+    subcategories_A_queryset = SubcategoryA.objects.filter(category=category)
+    for subcategory in subcategories_A_queryset:
+        if subcategory.name in subcategories_A:
+            subcategories_A[subcategory.name].append(
+                {"sub_category_id": subcategory.id, "value": subcategory.value}
+            )
+        else:
+            subcategories_A[subcategory.name] = [
+                {"sub_category_id": subcategory.id, "value": subcategory.value}
+            ]
+    subcategories_B_queryset = SubcategoryB.objects.filter(category=category)
+    for subcategory in subcategories_B_queryset:
+        if subcategory.name in subcategories_B:
+            subcategories_B[subcategory.name].append(
+                {"sub_category_id": subcategory.id, "value": subcategory.value}
+            )
+        else:
+            subcategories_B[subcategory.name] = [
+                {"sub_category_id": subcategory.id, "value": subcategory.value}
+            ]
+    return JsonResponse(
+        {"Subcategory_A": subcategories_A, "Subcategory_B": subcategories_B}
+    )
 
 
 @api_view(["GET"])

@@ -23,7 +23,8 @@ from .models import *
 admin.site.register(Tag)
 admin.site.register(Details)
 admin.site.register(Product)
+# admin.site.register(ProductImages)
 
-# @admin.register(Details)
-# class details(admin.ModelAdmin):
-#     list_display = ["name"]
+class ProductImagesAdmin(admin.ModelAdmin):
+    list_display = ("product", "image")
+admin.site.register(ProductImages,ProductImagesAdmin)

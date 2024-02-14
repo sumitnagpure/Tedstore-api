@@ -20,15 +20,20 @@ from .models import *
 # @admin.register(Tag)
 # class tag(admin.ModelAdmin):
 #     list_display = ["tag_id","name"]
-admin.site.register(Tag)
-admin.site.register(Details)
-admin.site.register(Product)
-admin.site.register(Category)
-admin.site.register(SubcategoryA)
-admin.site.register(SubcategoryB)
-# admin.site.register(ProductImages)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
 
 
 class ProductImagesAdmin(admin.ModelAdmin):
     list_display = ("product", "image")
-admin.site.register(ProductImages,ProductImagesAdmin)
+
+
+admin.site.register(Tag)
+admin.site.register(Details)
+admin.site.register(Product)
+# admin.site.register(Category)
+admin.site.register(SubcategoryA)
+admin.site.register(SubcategoryB)
+# admin.site.register(ProductImages)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(ProductImages, ProductImagesAdmin)

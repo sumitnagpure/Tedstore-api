@@ -61,7 +61,7 @@ def SubCategories(request, category_id):
                 {"sub_category_id": subcategory.id, "value": subcategory.value}
             ]
     return JsonResponse(
-        {"Subcategory_A": subcategories_A, "Subcategory_B": subcategories_B}
+        {"Subcategory_A": subcategories_A, "Subcategory_B": subcategories_B }
     )
 
 

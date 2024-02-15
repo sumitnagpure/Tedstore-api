@@ -12,3 +12,4 @@ urlpatterns = [
 
 
 # curl -H "Authorization: Token 35806b632bd790440eefa6be1bf50d872e355c36" http://localhost:8000/account/all_accounts
+# curl -X POST -H "Authorization: Token 35806b632bd790440eefa6be1bf50d872e355c36" -d email="first@email.com" http://localhost:8000/account/subscribed_users/

@@ -23,8 +23,10 @@ def AccountView(request):
     if request.method == "GET":
         data = (
             account.objects.all()
-            .annotate(first_name=F('user_id__first_name'),last_name=F('user_id__last_name'))
-            .values("first_name","last_name", "phone_number")
+            .annotate(
+                first_name=F("user_id__first_name"), last_name=F("user_id__last_name")
+            )
+            .values("first_name", "last_name", "phone_number")
         )
         # serializers = AccountSerializer(data, many=True)
         return Response(data, status=status.HTTP_200_OK)
@@ -34,4 +36,13 @@ def AccountView(request):
 def Subscribe(request):
     if request.method == "POST":
         email = request.data.get("email")
-        subscribers.objects.create(email=email)
+
+        if not email:
+            return Response(
+                {"error1": "email is required"}, status=status.HTTP_404_NOT_FOUND
+            )
+        try:
+            subscribers.objects.create(email=email)
+            return Response({"message": f"Subscription successful for {subscribers.email}"}, status=status.HTTP_201_CREATED,)
+        except Exception as e:
+            return Response("error {e}", status=status.HTTP_500_INTERNAL_SERVER_ERROR)

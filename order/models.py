@@ -18,3 +18,6 @@ class Order(models.Model):
     
     class Meta:
         db_table = "Orders"
+
+    def __str__(self):
+        return f"{self.id}"

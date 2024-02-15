@@ -3,8 +3,9 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register(Order) 
+# admin.site.register(Order) 
 
 # @admin.register(Order)
-# class Order(admin.ModelAdmin):
-#     list_display = ("id",'user_id','date_ordered','status','total_amount')
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ("id",'user_id','date_ordered','status','total_amount')
+admin.site.register(Order,OrderAdmin)

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+import json
 from core.settings import REST_FRAMEWORK
 from django.http import JsonResponse
 from .models import *
@@ -13,7 +13,6 @@ from rest_framework.decorators import api_view
 def AllProducts(request):
     if request.method == "GET":
         data = Product.objects.all()
-        
         return Response(data, status=status.HTTP_200_OK)
 
 
@@ -76,5 +75,5 @@ def GetProductDetails(request):
 def GetOffers(request):
     if request.method == "GET":
         data = Offer.objects.all()
-        return Response(data, status=status.HTTP_200_OK)
+        return Response(json.dumps(data), status=status.HTTP_200_OK)
     # [ {offer_id:int, offer_category: lorem, offer_description:lorem}, ..to 2 records ]

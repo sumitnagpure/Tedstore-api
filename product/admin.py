@@ -28,6 +28,10 @@ class ProductImagesAdmin(admin.ModelAdmin):
     list_display = ("product", "image")
 
 
+class OfferAdmin(admin.ModelAdmin):
+    list_display = ("id", "category", "description")
+
+
 admin.site.register(Tag)
 admin.site.register(Details)
 admin.site.register(Product)
@@ -37,3 +41,4 @@ admin.site.register(SubcategoryB)
 # admin.site.register(ProductImages)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(ProductImages, ProductImagesAdmin)
+admin.site.register(Offer, OfferAdmin)

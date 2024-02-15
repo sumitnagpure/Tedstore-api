@@ -43,6 +43,6 @@ def Subscribe(request):
             )
         try:
             subscribers.objects.create(email=email)
-            return Response({"message": f"Subscription successful for {subscribers.email}"}, status=status.HTTP_201_CREATED,)
+            return Response({"message": f"Subscription successful for {email}"}, status=status.HTTP_201_CREATED,)
         except Exception as e:
-            return Response("error {e}", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(f"{email} already Subscribed", status=status.HTTP_500_INTERNAL_SERVER_ERROR)

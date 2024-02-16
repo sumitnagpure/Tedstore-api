@@ -8,7 +8,6 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 
-
 @api_view(["GET"])
 def AllProducts(request):
     if request.method == "GET":
@@ -70,6 +69,7 @@ def GetProductDetails(request):
     if request.method == "GET":
         data = Product.objects.all()
         return Response(data, status=status.HTTP_200_OK)
+
 
 @api_view(["GET"])
 def GetOffers(request):

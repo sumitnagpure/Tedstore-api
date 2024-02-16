@@ -8,4 +8,4 @@ urlpatterns = [
 ]
 
 
-# curl -H "Authorization: Token 35806b632bd790440eefa6be1bf50d872e355c36" http://localhost:8000/order/api/order
+# curl -H "Authorization: Token 1917df6373994418a4f0e687e31d02b62287bc91" http://localhost:8000/order/api/order

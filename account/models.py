@@ -19,7 +19,7 @@ class account(models.Model):
 
 
 class subscribers(models.Model):
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
 
     def __str__(self):
         return str(self.email)

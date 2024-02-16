@@ -1,4 +1,5 @@
 # Product/models.py
+from tkinter import N
 from unittest.util import _MAX_LENGTH
 from django.db import models
 
@@ -65,9 +66,12 @@ class SubcategoryB(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    subcategory_a = models.ForeignKey(SubcategoryA, on_delete=models.CASCADE)
-    subcategory_b = models.ForeignKey(SubcategoryB, on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+    )
+    subcategory_a = models.ForeignKey(SubcategoryA, on_delete=models.CASCADE, null=True)
+    subcategory_b = models.ForeignKey(SubcategoryB, on_delete=models.CASCADE, null=True)
     base_price = models.IntegerField()
     discounted_price = models.IntegerField()
     in_stock = models.BooleanField()
@@ -89,3 +93,16 @@ class ProductImages(models.Model):
 
     class Meta:
         verbose_name_plural = "Product-Images"
+
+
+class Offer(models.Model):
+    category = models.CharField(max_length=30)
+    description = models.TextField()
+
+    class Meta:
+        verbose_name_plural = "Offers"
+
+    def __str__(self):
+        return self.category + " " + self.description
+
+    # [ {offer_id:int, offer_category: lorem, offer_description:lorem}, ..to 2 records ]

@@ -9,7 +9,6 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 
-
 @api_view(["GET"])
 def AllProducts(request):
     if request.method == "GET":
@@ -34,7 +33,6 @@ def HeroSectionSlide(request):
 
 
 # Product.objects.order_by("-id")[:1].values_list("id", "title", "description","Product__ProductImage_image")
-
 
 @api_view(["GET"])
 def SubCategories(request, category_id):

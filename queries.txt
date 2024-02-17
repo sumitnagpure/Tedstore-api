@@ -14,9 +14,6 @@
 >>> o1.category.name
 'Ac'
 
->>> Category.objects.all()       
-<QuerySet [<Category: Ac>]>
-
 >>> Category.objects.get_or_create(name="Cooler") 
 (<Category: Cooler>, True)
 
@@ -32,24 +29,27 @@
 >>> Product.objects.filter(category_id=1) 
 <QuerySet [<Product: Product A>, <Product: P 2>]>
 
-
 >>> Product.objects.__dict__ 
 {'_constructor_args': ((), {}), 'creation_counter': 21, 'model': <class 'product.models.Product'>, 'name': 'objects', '_db': None, '_hints': {}, 'auto_created': True}
 
 >>> Product.objects.model.__dict__ 
-mappingproxy({'__module__': 'product.models', '__str__': <function Product.__str__ at 0x000001F743089E40>, '__doc__': 'Product(id, title, description, category, subcategory_a, subcategory_b, base_price, discounted_price, in_stock, details)', '_meta': <Options for Product>, 'DoesNotExist': <class 'product.models.Product.DoesNotExist'>, 'MultipleObjectsReturned': <class 'product.models.Product.MultipleObjectsReturned'>, 'title': <django.db.models.query_utils.DeferredAttribute object at 0x000001F7430B5950>, 'description': <django.db.models.query_utils.DeferredAttribute object at 0x000001F7430B59D0>, 'category_id': <django.db.models.fields.related_descriptors.ForeignKeyDeferredAttribute object at 0x000001F7430B5C90>, 'category': <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x000001F7430B5A90>, 'subcategory_a_id': <django.db.models.fields.related_descriptors.ForeignKeyDeferredAttribute object at 0x000001F7430B5E90>, 'subcategory_a': <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x000001F7430B5D50>, 'subcategory_b_id': <django.db.models.fields.related_descriptors.ForeignKeyDeferredAttribute object at 0x000001F7430B6050>, 'subcategory_b': <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x000001F7430B5F50>, 'base_price': <django.db.models.query_utils.DeferredAttribute object at 0x000001F7430B6150>, 'discounted_price': <django.db.models.query_utils.DeferredAttribute object at 0x000001F7430B6190>, 'in_stock': <django.db.models.query_utils.DeferredAttribute object at 0x000001F7430B6210>, 'tags': <django.db.models.fields.related_descriptors.ManyToManyDescriptor object at 0x000001F7430B78D0>, 'details_id': <django.db.models.fields.related_descriptors.ForeignKeyDeferredAttribute object at 0x000001F7430B5FD0>, 'details': <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x000001F7430B7950>, 'id': <django.db.models.query_utils.DeferredAttribute object at 0x000001F7430B7AD0>, 'objects': <django.db.models.manager.ManagerDescriptor object at 0x000001F7430B7C50>, 'productimages_set': <django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor object at 0x000001F74308EF50>, 'Product_id': <django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor object at 0x000001F7430C05D0>})
+{'__doc__': 'Product(id, title, description, category, subcategory_a, subcategory_b, base_price, discounted_price, in_stock, details)',
+ '_meta': <Options for Product>,
+ 'objects',
+ 'productimages_set',
+ 'Product_id'}
 
 >>> Product.objects.get(id=1)      
 <Product: Product A>
 
 >>> Product.objects.get(id=1).__dict__
-{'_state': <django.db.models.base.ModelState object at 0x000001F7431823D0>, 'id': 1, 'title': 'Product A', 'description': 'sdjfsnfsn', 'category_id': 1, 'subcategory_a_id': 1, 'subcategory_b_id': 1, 'base_price': 100, 'discounted_price': 90, 'in_stock': True, 'details_id': 'Super Cool'}
+{'id': 1, 'title': 'Product A', 'description': 'sdjfsnfsn', 'category_id': 1, 'subcategory_a_id': 1, 'subcategory_b_id': 1, 'base_price': 100, 'discounted_price': 90, 'in_stock': True, 'details_id': 'Super Cool'}
 
 >>> Product.objects.get(id=1).category
 <Category: Ac>
 
 >>> Product.objects.get(id=1).category.__dict__
-{'_state': <django.db.models.base.ModelState object at 0x000001F743182DD0>, 'id': 1, 'name': 'Ac'}
+{'id': 1, 'name': 'Ac'}
 
 >>> Product.objects.get(id=1).category.name    
 'Ac'
@@ -71,12 +71,16 @@ mappingproxy({'__module__': 'product.models', '__str__': <function Product.__str
 
 >>> Product.objects.filter(category_id=1)[0]     
 <Product: Product A>
+    
 >>> Product.objects.filter(category_id=1)[0].category.name
 'Ac'
+
 >>> Product.objects.filter(category_id=1).values("category__name")  
 <QuerySet [{'category__name': 'Ac'}, {'category__name': 'Ac'}]>
+
 >>> Product.objects.filter(category_id=1).values("category__id")   
 <QuerySet [{'category__id': 1}, {'category__id': 1}]>
+
 >>> Product.objects.filter(category_id=1).values("category__id", "category__name") 
 <QuerySet [{'category__id': 1, 'category__name': 'Ac'}, {'category__id': 1, 'category__name': 'Ac'}]>
 

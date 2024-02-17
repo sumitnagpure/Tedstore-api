@@ -1,0 +1,206 @@
+PS D:\xScientist\TedStore-api> .\env\Scripts\activate
+(env) PS D:\xScientist\TedStore-api> python manage.py shell
+Python 3.11.2 (tags/v3.11.2:878ead1, Feb  7 2023, 16:38:35) [MSC v.1934 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> form product.models import *
+  File "<console>", line 1
+    form product.models import *
+         ^^^^^^^
+SyntaxError: invalid syntax
+>>> from product.models import * 
+>>> Product.object.get(id=1)       
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Product' has no attribute 'object'
+>>> Product.objects.get(id=1) 
+<Product: Product A>
+>>> o1=Product.objects.get(id=1) 
+>>> type(o1) 
+<class 'product.models.Product'>
+>>> o1.values("category") 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Product' object has no attribute 'values'
+>>> o1.["category"]       
+  File "<console>", line 1
+    o1.["category"]
+       ^
+SyntaxError: invalid syntax
+>>> o1["category"]   
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: 'Product' object is not subscriptable
+>>> o1.category   
+<Category: Ac>
+>>> type(o1.category)
+<class 'product.models.Category'>
+>>> o1.category.id    
+1
+>>> o1.category.name
+'Ac'
+>>> Category.objects.all()       
+<QuerySet [<Category: Ac>]>
+>>> Category.objects.get_or_create(name=Cooler) 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'Cooler' is not defined
+>>> Category.objects.get_or_create(name="Cooler") 
+(<Category: Cooler>, True)
+>>> Category.objects.get_or_create(name="Cooler") 
+(<Category: Cooler>, False)
+>>> Category.objects.all()                        
+<QuerySet [<Category: Ac>, <Category: Cooler>]>
+>>> Category.objects.create(name="Cooler")        
+<Category: Cooler>
+>>> o1=Product.objects.get(category.id=1)         
+  File "<console>", line 1
+    o1=Product.objects.get(category.id=1)
+                           ^^^^^^^^^^^^
+SyntaxError: expression cannot contain assignment, perhaps you meant "=="?
+>>> o1=Product.objects.get(category.id==1) 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'category' is not defined
+>>> o1=Product.objects.get().category.id=1    
+>>> o1
+1
+>>> Product.objects.get().category.id=1    
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "D:\xScientist\TedStore-api\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\xScientist\TedStore-api\env\Lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.MultipleObjectsReturned(
+product.models.Product.MultipleObjectsReturned: get() returned more than one Product -- it returned 2!
+>>> o1=Product.objects.get().category.id=1 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "D:\xScientist\TedStore-api\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\xScientist\TedStore-api\env\Lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.MultipleObjectsReturned(
+product.models.Product.MultipleObjectsReturned: get() returned more than one Product -- it returned 2!
+>>> cls
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'cls' is not defined
+>>> Product.objects.get().category.id=1    
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "D:\xScientist\TedStore-api\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\xScientist\TedStore-api\env\Lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.MultipleObjectsReturned(
+product.models.Product.MultipleObjectsReturned: get() returned more than one Product -- it returned 2!
+>>> Product.objects.filter(category.id=1) 
+  File "<console>", line 1
+    Product.objects.filter(category.id=1)
+                           ^^^^^^^^^^^^
+SyntaxError: expression cannot contain assignment, perhaps you meant "=="?
+>>> Product.objects.filter(category_id=1) 
+<QuerySet [<Product: Product A>, <Product: P 2>]>
+>>> Product.objects.filter(subcategory_a__id=1).values(id,subcategory_a__id, subcategory_a__category)  
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'subcategory_a__id' is not defined
+>>> Product.object__dict___                                                                           
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Product' has no attribute 'object__dict___'
+>>> Product.objects__dict___ 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Product' has no attribute 'objects__dict___'
+>>> Product.object.__dict___ 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Product' has no attribute 'object'
+>>> Product.objects.__dict___ 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Manager' object has no attribute '__dict___'
+>>> Product.objects.__dict__ 
+{'_constructor_args': ((), {}), 'creation_counter': 21, 'model': <class 'product.models.Product'>, 'name': 'objects', '_db': None, '_hints': {}, 'auto_created': True}
+>>> Product.objects.model.__dict__ 
+mappingproxy({'__module__': 'product.models', '__str__': <function Product.__str__ at 0x000001F743089E40>, '__doc__': 'Product(id, title, description, category, subcategory_a, subcategory_b, base_price, discounted_price, in_stock, details)', '_meta': <Options for Product>, 'DoesNotExist': <class 'product.models.Product.DoesNotExist'>, 'MultipleObjectsReturned': <class 'product.models.Product.MultipleObjectsReturned'>, 'title': <django.db.models.query_utils.DeferredAttribute object at 0x000001F7430B5950>, 'description': <django.db.models.query_utils.DeferredAttribute object at 0x000001F7430B59D0>, 'category_id': <django.db.models.fields.related_descriptors.ForeignKeyDeferredAttribute object at 0x000001F7430B5C90>, 'category': <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x000001F7430B5A90>, 'subcategory_a_id': <django.db.models.fields.related_descriptors.ForeignKeyDeferredAttribute object at 0x000001F7430B5E90>, 'subcategory_a': <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x000001F7430B5D50>, 'subcategory_b_id': <django.db.models.fields.related_descriptors.ForeignKeyDeferredAttribute object at 0x000001F7430B6050>, 'subcategory_b': <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x000001F7430B5F50>, 'base_price': <django.db.models.query_utils.DeferredAttribute object at 0x000001F7430B6150>, 'discounted_price': <django.db.models.query_utils.DeferredAttribute object at 0x000001F7430B6190>, 'in_stock': <django.db.models.query_utils.DeferredAttribute object at 0x000001F7430B6210>, 'tags': <django.db.models.fields.related_descriptors.ManyToManyDescriptor object at 0x000001F7430B78D0>, 'details_id': <django.db.models.fields.related_descriptors.ForeignKeyDeferredAttribute object at 0x000001F7430B5FD0>, 'details': <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x000001F7430B7950>, 'id': <django.db.models.query_utils.DeferredAttribute object at 0x000001F7430B7AD0>, 'objects': <django.db.models.manager.ManagerDescriptor object at 0x000001F7430B7C50>, 'productimages_set': <django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor object at 0x000001F74308EF50>, 'Product_id': <django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor object at 0x000001F7430C05D0>})
+>>> Product.objects.get(id=1)      
+<Product: Product A>
+>>> Product.objects.get(id=1).__dict__
+{'_state': <django.db.models.base.ModelState object at 0x000001F7431823D0>, 'id': 1, 'title': 'Product A', 'description': 'sdjfsnfsn', 'category_id': 1, 'subcategory_a_id': 1, 'subcategory_b_id': 1, 'base_price': 100, 'discounted_price': 90, 'in_stock': True, 'details_id': 'Super Cool'}
+>>> Product.objects.get(id=1).category
+<Category: Ac>
+>>> Product.objects.get(id=1).category.__dict__
+{'_state': <django.db.models.base.ModelState object at 0x000001F743182DD0>, 'id': 1, 'name': 'Ac'}
+>>> Product.objects.get(id=1).category.name    
+'Ac'
+>>> type(Product.objects.get(id=1).category.name)
+<class 'str'>
+>>> type(Product.objects.filter(category_id=1)   
+...  
+... 
+...   
+KeyboardInterrupt
+>>> Product.objects.get(id=1).category.name)      
+  File "<console>", line 1
+    Product.objects.get(id=1).category.name)
+                                           ^
+SyntaxError: unmatched ')'
+>>> Product.objects.filter(category_id=1)   
+<QuerySet [<Product: Product A>, <Product: P 2>]>
+>>> Product.objects.filter(category_id=1)[0].category
+<Category: Ac>
+>>> Product.objects.filter(category_id=1).values("category") 
+<QuerySet [{'category': 1}, {'category': 1}]>
+>>> Product.objects.filter(category_id=1).values("category")[0] 
+{'category': 1}
+>>> Product.objects.filter(category_id=1).values("category")[0].name
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'dict' object has no attribute 'name'
+>>> Product.objects.filter(category_id=1)[0].name                    
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Product' object has no attribute 'name'
+>>> Product.objects.filter(category_id=1)[0]     
+<Product: Product A>
+>>> Product.objects.filter(category_id=1)[0].category.name
+'Ac'
+>>> Product.objects.filter(category_id=1).values("category__name")  
+<QuerySet [{'category__name': 'Ac'}, {'category__name': 'Ac'}]>
+>>> Product.objects.filter(category_id=1).values("category__id")   
+<QuerySet [{'category__id': 1}, {'category__id': 1}]>
+>>> Product.objects.filter(category_id=1).values("category__id", "category__name") 
+<QuerySet [{'category__id': 1, 'category__name': 'Ac'}, {'category__id': 1, 'category__name': 'Ac'}]>
+>>> Product.objects.filter(category_id=1).values("category_id", "category_name")   
+Traceback (most recent call last):
+  File "D:\xScientist\TedStore-api\env\Lib\site-packages\django\db\models\sql\query.py", line 2188, in add_fields
+    join_info = self.setup_joins(
+                ^^^^^^^^^^^^^^^^^
+  File "D:\xScientist\TedStore-api\env\Lib\site-packages\django\db\models\sql\query.py", line 1856, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "D:\xScientist\TedStore-api\env\Lib\site-packages\django\db\models\sql\query.py", line 1761, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'category_name' into field. Choices are: Product_id, base_price, category, category_id, description, details, details_id, discounted_price, id, in_stock, productimages, subcategory_a, subcategory_a_id, subcategory_b, subcategory_b_id, tags, title
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "D:\xScientist\TedStore-api\env\Lib\site-packages\django\db\models\query.py", line 1358, in values
+    clone = self._values(*fields, **expressions)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\xScientist\TedStore-api\env\Lib\site-packages\django\db\models\query.py", line 1353, in _values
+    clone.query.set_values(fields)
+  File "D:\xScientist\TedStore-api\env\Lib\site-packages\django\db\models\sql\query.py", line 2491, in set_values
+    self.add_fields(field_names, True)
+  File "D:\xScientist\TedStore-api\env\Lib\site-packages\django\db\models\sql\query.py", line 2216, in add_fields
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'category_name' into field. Choices are: Product_id, base_price, category, category_id, description, details, details_id, discounted_price, id, in_stock, productimages, subcategory_a, subcategory_a_id, subcategory_b, subcategory_b_id, tags, title
+>>> Product.objects.filter(category_id=1).values("category__id", "category__name")
+<QuerySet [{'category__id': 1, 'category__name': 'Ac'}, {'category__id': 1, 'category__name': 'Ac'}]>
+>>>

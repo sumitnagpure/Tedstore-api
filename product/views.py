@@ -1,7 +1,8 @@
 from django.shortcuts import render
-import json
 from core.settings import REST_FRAMEWORK
 from django.http import JsonResponse
+
+import product
 from .models import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -12,7 +13,7 @@ from rest_framework.decorators import api_view
 @api_view(["GET"])
 def AllProducts(request):
     if request.method == "GET":
-        data = Product.objects.all()
+        data = Product.objects.all().values("title")
         return Response(data, status=status.HTTP_200_OK)
 
 
@@ -68,21 +69,29 @@ def SubCategories(request, category_id):
 @api_view(["GET"])
 def GetProductDetails(request):
     if request.method == "GET":
-        data = Product.objects.all()
-        return Response(data, status=status.HTTP_200_OK)
+        product_title = request.GET.get("product_title")
+
+        product = Product.objects.get(title=product_title)
+        response_data = {
+            "product_id": product.id,
+            "product_title": product.title,
+            "product_description": product.description,
+            "product_base_price": product.base_price,
+            "product_discounted_price": product.discounted_price,
+            "in_stock": product.in_stock,
+            "product_tags": [{"tags_id": tag.id, "tags_name": tag.name} for tag in product.tags.all()],
+            "product_details": product.details,
+            "product_images": [img.image.url for img in product.productimages_set.all()],
+            "product_features_images": [img.image.url for img in product.featuresimages_set.all()],
+            "product_specifications": [{"name": spec.name, "value": spec.value} for spec in product.specifications.all()]
+        }
+        # data = Product.objects.all()
+        return Response(response_data, status=status.HTTP_200_OK)
 
 
 @api_view(["GET"])
 def GetOffers(request):
     if request.method == "GET":
-        offers = Offer.objects.all()
-        data = list()
-        for offer in offers:
-            offer_data = {
-                "offer_id": offer.id,
-                "offer_category": offer.category,
-                "offer_description": offer.description,
-            }
-            data.append(offer_data)
-        return Response(data, status=status.HTTP_200_OK)
+        offers = Offer.objects.all().values("category","description")
+        return Response(offers, status=status.HTTP_200_OK)
     # [ {offer_id:int, offer_category: lorem, offer_description:lorem}, ..to 2 records ]

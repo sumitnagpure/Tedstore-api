@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 
+
 @api_view(["GET"])
 def AllProducts(request):
     if request.method == "GET":
@@ -60,7 +61,7 @@ def SubCategories(request, category_id):
                 {"sub_category_id": subcategory.id, "value": subcategory.value}
             ]
     return JsonResponse(
-        {"Subcategory_A": subcategories_A, "Subcategory_B": subcategories_B }
+        {"Subcategory_A": subcategories_A, "Subcategory_B": subcategories_B}
     )
 
 
@@ -74,6 +75,14 @@ def GetProductDetails(request):
 @api_view(["GET"])
 def GetOffers(request):
     if request.method == "GET":
-        data = Offer.objects.all()
-        return Response(json.dumps(data), status=status.HTTP_200_OK)
+        offers = Offer.objects.all()
+        data = list()
+        for offer in offers:
+            offer_data = {
+                "offer_id": offer.id,
+                "offer_category": offer.category,
+                "offer_description": offer.description,
+            }
+            data.append(offer_data)
+        return Response(data, status=status.HTTP_200_OK)
     # [ {offer_id:int, offer_category: lorem, offer_description:lorem}, ..to 2 records ]

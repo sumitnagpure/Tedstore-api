@@ -1,0 +1,35 @@
+# Display products with category 1
+>> Product.objects.filter(category_id=1)
+
+# Display products with category "Ac"
+>> Product.objects.filter(category__name="Ac")
+
+# Display Product with id =1
+>> Product.objects.get(id=1)
+
+# Display Product with title "Product A"
+>> Product.objects.get(title="Product A")
+
+# Display Category with max products
+>> Category.objects.annotate(num_products=Count('product')).order_by('-num_products').first()
+
+# Find products within a specific price range
+>> Product.objects.filter(base_price__gte=800, base_price__lte=1100)
+
+# Find products in a specific category and subcategory A
+>> Product.objects.filter(category__name="Ac", subcategory_a="1")
+                            OR
+>> Product.objects.filter(category__id="1", subcategory_a__id=1)
+
+# Find products with at least one image
+>> Product.objects.filter(productimages__isnull=False).distinct()
+
+# Find details and average price for each category
+>> from django.db.models import Avg
+>> Product.objects.all().aggregate(Average_Price=Avg('base_price'))
+
+# Find products with the highest discounted price within each category
+>> Product.objects.values('category__name').annotate(Highest_Discounted_Price=Max('discounted_price')).order_by('category__name')
+
+# Find products with details containing a specific keyword
+>> 

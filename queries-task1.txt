@@ -21,7 +21,7 @@
                             OR
 >> Product.objects.filter(category__id="1", subcategory_a__id=1)
 
-# Find products with at least one image
+# Find products with atleast one image
 >> Product.objects.filter(productimages__isnull=False).distinct()
 
 # Find details and average price for each category
@@ -32,4 +32,4 @@
 >> Product.objects.values('category__name').annotate(Highest_Discounted_Price=Max('discounted_price')).order_by('category__name')
 
 # Find products with details containing a specific keyword
->> 
+>> Product.objects.filter(details__name__icontains="Super")

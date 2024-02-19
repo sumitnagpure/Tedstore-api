@@ -1,0 +1,3 @@
+# Create (foreign key, Many To Many) & update queries
+
+#

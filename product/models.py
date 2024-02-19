@@ -24,7 +24,7 @@ class Details(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
         return str(self.name)
@@ -38,7 +38,7 @@ class SubcategoryA(models.Model):
         Category, related_name="subcategory_A", on_delete=models.CASCADE
     )
     name = models.CharField(max_length=20)
-    value = models.CharField(max_length=20)
+    value = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
         return str(self.name + " " + self.value)
@@ -52,7 +52,7 @@ class SubcategoryB(models.Model):
         Category, related_name="subcategory_B", on_delete=models.CASCADE
     )
     name = models.CharField(max_length=20)
-    value = models.CharField(max_length=20)
+    value = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
         return str(self.name + " " + self.value)
@@ -62,7 +62,7 @@ class SubcategoryB(models.Model):
 
 
 class Product(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True)
     description = models.TextField()
     category = models.ForeignKey(
         Category,
@@ -87,7 +87,7 @@ class Product(models.Model):
 
 class ProductImages(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="media/")
+    image = models.ImageField(upload_to="media/", unique=True)
 
     class Meta:
         verbose_name_plural = "Product-Images"
@@ -95,7 +95,7 @@ class ProductImages(models.Model):
 
 class Offer(models.Model):
     category = models.CharField(max_length=30)
-    description = models.TextField()
+    description = models.TextField(unique=True)
 
     class Meta:
         verbose_name_plural = "Offers"

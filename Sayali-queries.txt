@@ -1,0 +1,25 @@
+# Display products with category 1
+
+# Display products with category "Ac"
+
+# Display Product with id =1
+
+# Display Product with title "Product A"
+
+# Display Category with max products
+
+# Find products within a specific price range
+
+# Find products in a specific category and subcategory A
+
+# Find products with atleast one image
+
+# Find details and average price for each category
+
+# Find products with the highest discounted price within each category
+
+# Find products with details containing a specific keyword
+
+
+# advanced
+# Create (foreign key, Many To Many) & update queries

@@ -1,9 +1,13 @@
 # Create (foreign key, Many To Many) & update queries
 
-#
+# Adding a new Product
 >> category=Category.objects.get(name="Ac")
 >> details=Details.objects.get(name="Super Cool")
 >> tag=Tag.objects.get(name="Large")
 >> subcategory_a=SubcategoryA.objects.get(name="Ton",value="1")
 >> subcategory_b=SubcategoryB.objects.get(value="1")
 >> Product.objects.create(title="Product C",description="asdad",category=category,subcategory_a=subcategory_a, subcategory_b=subcategory_b,base_pory_b=subcategory_b,base_price=230, discounted_price=200,in_stock=True,details=details)
+
+
+#Adding a new ProductImage
+>> 
